@@ -646,4 +646,30 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteAccountBtn.disabled = true;
         });
     }
+
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card, .benefit-item, .stat-card, .step, .hist-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        fadeObserver.observe(el);
+    });
+
+    const miniCats = document.querySelectorAll('.mini-cat');
+    let miniIndex = 0;
+    setInterval(() => {
+        miniCats.forEach(c => c.classList.remove('active'));
+        miniCats[miniIndex % miniCats.length].classList.add('active');
+        miniIndex++;
+    }, 1800);
 });
