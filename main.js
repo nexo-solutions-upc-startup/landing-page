@@ -729,4 +729,51 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    const sosFab = document.getElementById('sosFab');
+    
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollY / docHeight;
+        sosFab.style.opacity = progress < 0.05 ? '0' : '1';
+        sosFab.style.pointerEvents = progress < 0.05 ? 'none' : 'auto';
+    });
+
+    sosFab.style.opacity = '0';
+    sosFab.style.pointerEvents = 'none';
+    sosFab.style.transition = 'opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease';
+
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+
+    sosFab.addEventListener('click', () => {
+        document.getElementById('modalSuccess').classList.add('hidden');
+        document.querySelectorAll('.modal-cat').forEach(b => b.classList.remove('selected-modal'));
+        modalOverlay.classList.remove('hidden');
+    });
+
+    modalClose.addEventListener('click', () => {
+        modalOverlay.classList.add('hidden');
+    });
+
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) modalOverlay.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.modal-cat').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const type = btn.getAttribute('data-mtype');
+            btn.textContent = '⏳ Enviando...';
+            btn.disabled = true;
+            setTimeout(() => {
+                const code = '#NX-' + Math.floor(1000 + Math.random() * 9000);
+                document.getElementById('modalCode').textContent = code;
+                document.getElementById('modalSuccess').classList.remove('hidden');
+                document.querySelector('.modal__cats').classList.add('hidden');
+                btn.textContent = type;
+                btn.disabled = false;
+            }, 1000);
+        });
+    });
 });

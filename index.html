@@ -839,6 +839,39 @@
             </div>
         </div>
     </section>
+
+    <section class="download" id="download">
+        <div class="container">
+            <div class="download__inner">
+                <div class="download__text">
+                    <h2>Descarga Nexo Urbano</h2>
+                    <p>Disponible para Android e iOS. Gratuito para todos los ciudadanos de Lima Metropolitana.</p>
+                    <div class="download__badges">
+                        <a href="#" class="store-badge">
+                            <span>▶</span>
+                            <div>
+                                <small>Disponible en</small>
+                                <strong>Google Play</strong>
+                            </div>
+                        </a>
+                        <a href="#" class="store-badge">
+                            <span></span>
+                            <div>
+                                <small>Disponible en</small>
+                                <strong>App Store</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="download__qr">
+                    <div class="qr-placeholder">
+                        <div class="qr-grid"></div>
+                        <span>Escanea para descargar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <!-- PERFIL DE USUARIO US24 US25 US26 US27 US28 US30 -->
     <section class="profile-section" id="profile">
@@ -1417,6 +1450,120 @@
             </div>
         </div>
     </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Contacto</span>
+                <h2 class="section-title">¿Eres una municipalidad o entidad de emergencia?</h2>
+                <p class="section-desc">Estamos construyendo alianzas para que Nexo Urbano llegue a más ciudadanos. Escríbenos.</p>
+            </div>
+            <div class="contact__wrapper">
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="contactName" placeholder="Tu nombre" required>
+                            <span class="form-error" id="contactNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Institución</label>
+                            <input type="text" id="contactOrg" placeholder="Municipalidad / Entidad">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" id="contactEmail" placeholder="contacto@institucion.gob.pe" required>
+                        <span class="form-error" id="contactEmailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje</label>
+                        <textarea id="contactMessage" placeholder="Cuéntanos sobre tu institución y cómo podemos colaborar..." required></textarea>
+                        <span class="form-error" id="contactMsgError"></span>
+                    </div>
+                    <button type="submit" class="btn btn--primary">Enviar mensaje</button>
+                </form>
+                <div class="contact-success hidden" id="contactSuccess">
+                    <span class="acc-success__icon">✓</span>
+                    <h3>Mensaje enviado</h3>
+                    <p>Nos pondremos en contacto contigo pronto.</p>
+                </div>
+                <div class="contact__info">
+                    <div class="contact-info-item">
+                        <span>📧</span>
+                        <span>contacto@nexourbano.pe</span>
+                    </div>
+                    <div class="contact-info-item">
+                        <span>📍</span>
+                        <span>Lima Metropolitana, Perú</span>
+                    </div>
+                    <div class="contact-info-item">
+                        <span>🤝</span>
+                        <span>Alianzas con municipalidades y Defensa Civil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <a href="#" class="nav__logo">
+                        <span class="nav__logo-icon">!</span>
+                        <span>Nexo Urbano</span>
+                    </a>
+                    <p>Conectando ciudadanos con las autoridades de emergencia en Lima.</p>
+                </div>
+                <div class="footer__links">
+                    <div class="footer__col">
+                        <strong>Producto</strong>
+                        <a href="#features">Funcionalidades</a>
+                        <a href="#how">Cómo funciona</a>
+                        <a href="#download">Descargar</a>
+                    </div>
+                    <div class="footer__col">
+                        <strong>Empresa</strong>
+                        <a href="#benefits">Beneficios</a>
+                        <a href="#comparison">Comparativa</a>
+                        <a href="#contact">Contacto</a>
+                    </div>
+                    <div class="footer__col">
+                        <strong>Legal</strong>
+                        <a href="#terms">Términos de uso</a>
+                        <a href="#privacy">Privacidad</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span>© 2026 Nexo Urbano. Todos los derechos reservados.</span>
+                <span>Hecho en Lima, Perú 🇵🇪</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="sos-fab" id="sosFab" title="Simular reporte de emergencia">
+        S.O.S
+    </div>
+
+    <div class="modal-overlay hidden" id="modalOverlay">
+        <div class="modal" id="quickReportModal">
+            <button class="modal__close" id="modalClose">✕</button>
+            <h3>Reporte rápido</h3>
+            <p>Selecciona el tipo de emergencia:</p>
+            <div class="modal__cats">
+                <button class="modal-cat" data-mtype="Accidente">🚗 Accidente</button>
+                <button class="modal-cat" data-mtype="Incendio">🔥 Incendio</button>
+                <button class="modal-cat" data-mtype="Robo">🔫 Robo</button>
+                <button class="modal-cat" data-mtype="Gas">⚡ Gas</button>
+            </div>
+            <div class="modal__success hidden" id="modalSuccess">
+                <span class="acc-success__icon">✓</span>
+                <p>Reporte enviado. Código: <strong id="modalCode"></strong></p>
+            </div>
+        </div>
+    </div>
 
 <script src="main.js"></script>
 </body>
