@@ -235,4 +235,320 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // ===== OPERADOR — TABS =====
+    const opTabs = document.querySelectorAll('.op-tab');
+    const opPanels = document.querySelectorAll('.op-panel');
+
+    opTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            opTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const id = tab.getAttribute('data-optab');
+            opPanels.forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('optab-' + id);
+            if (target) target.classList.add('active');
+        });
+    });
+
+    // US33 Ver detalle de incidente
+    document.querySelectorAll('.op-btn--view').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const list = document.getElementById('opIncidentsList');
+            const detail = document.getElementById('opDetail');
+            const content = document.getElementById('opDetailContent');
+            const map = {
+                INC001: { type: 'Accidente vehicular con heridos', loc: 'Av. Javier Prado Este 2140, San Isidro', time: 'Hace 3 min', reporter: 'Ciudadano anónimo', media: 'Foto adjunta', status: 'Pendiente de asignación' },
+                INC002: { type: 'Fuga de gas domiciliaria', loc: 'San Isidro, Calle Las Magnolias 380', time: 'Hace 8 min', reporter: 'María Ramos', media: 'Sin evidencia', status: 'Pendiente de validación' },
+                INC003: { type: 'Robo al paso', loc: 'Miraflores, Av. Larco 400', time: 'Hace 12 min', reporter: 'Reporte anónimo', media: 'Video adjunto', status: 'Pendiente de asignación' },
+            };
+            const d = map[id];
+            if (!d) return;
+            content.innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div><strong>Tipo:</strong> ${d.type}</div>
+          <div><strong>Ubicación:</strong> ${d.loc}</div>
+          <div><strong>Recibido:</strong> ${d.time}</div>
+          <div><strong>Reportado por:</strong> ${d.reporter}</div>
+          <div><strong>Evidencia:</strong> ${d.media}</div>
+          <div><strong>Estado:</strong> <span style="color:var(--red);font-weight:600">${d.status}</span></div>
+          <div style="margin-top:8px;padding:12px;background:rgba(229,57,53,0.06);border-radius:8px;font-size:0.8rem;color:var(--gray-3)">📎 La evidencia multimedia solo es visible en la aplicación oficial de operadores.</div>
+        </div>`;
+            list.classList.add('hidden');
+            detail.classList.remove('hidden');
+        });
+    });
+
+    const opDetailBack = document.getElementById('opDetailBack');
+    if (opDetailBack) {
+        opDetailBack.addEventListener('click', () => {
+            document.getElementById('opIncidentsList').classList.remove('hidden');
+            document.getElementById('opDetail').classList.add('hidden');
+        });
+    }
+
+    // US32 Asignar desde monitor
+    document.querySelectorAll('.op-btn--assign').forEach(btn => {
+        btn.addEventListener('click', () => {
+            opTabs.forEach(t => t.classList.remove('active'));
+            opPanels.forEach(p => p.classList.remove('active'));
+            document.querySelector('[data-optab="assign"]').classList.add('active');
+            document.getElementById('optab-assign').classList.add('active');
+            const id = btn.getAttribute('data-id');
+            const sel = document.getElementById('assignIncidentSelect');
+            if (sel) sel.value = id;
+        });
+    });
+
+    // US31 Validar reportes
+    document.querySelectorAll('.op-btn--confirm').forEach(btn => {
+        const vid = btn.getAttribute('data-vid');
+        if (!vid) return;
+        btn.addEventListener('click', () => {
+            const item = document.getElementById(vid);
+            if (item) {
+                item.classList.add('confirmed');
+                item.querySelectorAll('button').forEach(b => b.disabled = true);
+                const badge = document.createElement('span');
+                badge.textContent = '✓ Confirmado';
+                badge.style.cssText = 'font-size:0.75rem;font-weight:700;color:#388E3C;padding:4px 8px;background:rgba(76,175,80,0.12);border-radius:4px;';
+                item.querySelector('.validate-item__actions').appendChild(badge);
+                checkValidateEmpty();
+            }
+        });
+    });
+
+    document.querySelectorAll('.op-btn--discard').forEach(btn => {
+        const vid = btn.getAttribute('data-vid');
+        if (!vid) return;
+        btn.addEventListener('click', () => {
+            const item = document.getElementById(vid);
+            if (item) {
+                item.classList.add('discarded');
+                item.querySelectorAll('button').forEach(b => b.disabled = true);
+                checkValidateEmpty();
+            }
+        });
+    });
+
+    document.querySelectorAll('.op-btn--dup').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const vid = btn.getAttribute('data-vid');
+            const item = document.getElementById(vid);
+            if (item) {
+                const flag = document.createElement('span');
+                flag.className = 'val-flag val-flag--err';
+                flag.textContent = 'Marcado como duplicado';
+                item.querySelector('.validate-item__flags').appendChild(flag);
+                btn.disabled = true;
+            }
+        });
+    });
+
+    function checkValidateEmpty() {
+        const items = document.querySelectorAll('.validate-item');
+        const allDone = [...items].every(i => i.classList.contains('confirmed') || i.classList.contains('discarded'));
+        if (allDone) document.getElementById('validateEmpty').classList.remove('hidden');
+    }
+
+    // US32 Asignar unidades
+    document.querySelectorAll('.unit-assign-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const incSel = document.getElementById('assignIncidentSelect');
+            if (!incSel.value) {
+                const fb = document.getElementById('assignFeedback');
+                fb.textContent = '⚠ Selecciona primero un incidente.';
+                fb.style.background = 'rgba(229,57,53,0.08)';
+                fb.style.color = 'var(--red)';
+                fb.classList.remove('hidden');
+                setTimeout(() => fb.classList.add('hidden'), 2000);
+                return;
+            }
+            const unit = btn.getAttribute('data-unit');
+            btn.classList.add('assigned-btn');
+            btn.textContent = '✓ Asignado';
+            btn.disabled = true;
+            btn.closest('.unit-card').classList.add('assigned');
+            const closeBtn = document.getElementById('closeIncidentBtn');
+            if (closeBtn) closeBtn.disabled = false;
+            const fb = document.getElementById('assignFeedback');
+            fb.textContent = `✓ ${unit} asignado al incidente. La unidad fue notificada.`;
+            fb.style.background = '';
+            fb.style.color = '';
+            fb.classList.remove('hidden');
+            const stat = document.getElementById('opActive');
+            if (stat) stat.textContent = parseInt(stat.textContent) + 1;
+        });
+    });
+
+    // US37 Escalar
+    const escalateBtn = document.getElementById('escalateBtn');
+    if (escalateBtn) {
+        escalateBtn.addEventListener('click', () => {
+            const fb = document.getElementById('assignFeedback');
+            fb.textContent = '↑ Incidente escalado a Defensa Civil. Se notificó al jefe de turno.';
+            fb.classList.remove('hidden');
+            escalateBtn.disabled = true;
+            escalateBtn.textContent = '↑ Escalado ✓';
+        });
+    }
+
+    // US39 Contactar ciudadano
+    const contactCitizenBtn = document.getElementById('contactCitizenBtn');
+    if (contactCitizenBtn) {
+        contactCitizenBtn.addEventListener('click', () => {
+            const fb = document.getElementById('assignFeedback');
+            fb.textContent = '📞 Notificación enviada al ciudadano con el estado de su reporte.';
+            fb.classList.remove('hidden');
+            contactCitizenBtn.disabled = true;
+            contactCitizenBtn.textContent = '📞 Ciudadano contactado ✓';
+        });
+    }
+
+    // US35 Actualizar estado
+    const updateStatusBtn = document.getElementById('updateStatusBtn');
+    if (updateStatusBtn) {
+        updateStatusBtn.addEventListener('click', () => {
+            const fb = document.getElementById('assignFeedback');
+            fb.textContent = '⟳ Estado actualizado a "En proceso". El ciudadano fue notificado.';
+            fb.classList.remove('hidden');
+        });
+    }
+
+    // US34 Cerrar incidente
+    const closeIncidentBtn = document.getElementById('closeIncidentBtn');
+    if (closeIncidentBtn) {
+        closeIncidentBtn.addEventListener('click', () => {
+            const fb = document.getElementById('assignFeedback');
+            fb.textContent = '✓ Incidente cerrado y registrado en el historial. Recursos liberados.';
+            fb.classList.remove('hidden');
+            closeIncidentBtn.disabled = true;
+            closeIncidentBtn.textContent = '✓ Cerrado';
+            const pending = document.getElementById('opPending');
+            const resolved = document.getElementById('opResolved');
+            if (pending) pending.textContent = Math.max(0, parseInt(pending.textContent) - 1);
+            if (resolved) resolved.textContent = parseInt(resolved.textContent) + 1;
+        });
+    }
+
+    // US40 Exportar historial
+    const exportHistoryBtn = document.getElementById('exportHistoryBtn');
+    if (exportHistoryBtn) {
+        exportHistoryBtn.addEventListener('click', () => {
+            exportHistoryBtn.textContent = '⏳ Generando...';
+            exportHistoryBtn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('exportNote').classList.remove('hidden');
+                exportHistoryBtn.textContent = '⬇ Exportar';
+                exportHistoryBtn.disabled = false;
+            }, 1200);
+        });
+    }
+
+    // US46 Alertas masivas
+    const adminAlertBtn = document.getElementById('adminAlertBtn');
+    const adminMassAlert = document.getElementById('adminMassAlert');
+    const cancelMassAlertBtn = document.getElementById('cancelMassAlertBtn');
+    const sendMassAlertBtn = document.getElementById('sendMassAlertBtn');
+
+    if (adminAlertBtn) {
+        adminAlertBtn.addEventListener('click', () => {
+            document.querySelectorAll('.admin-modal').forEach(m => m.classList.add('hidden'));
+            adminMassAlert.classList.toggle('hidden');
+        });
+    }
+
+    if (cancelMassAlertBtn) {
+        cancelMassAlertBtn.addEventListener('click', () => adminMassAlert.classList.add('hidden'));
+    }
+
+    if (sendMassAlertBtn) {
+        sendMassAlertBtn.addEventListener('click', () => {
+            const msg = document.getElementById('massAlertMsg').value.trim();
+            if (!msg) { document.getElementById('massAlertMsg').style.borderColor = 'var(--red)'; return; }
+            sendMassAlertBtn.textContent = 'Enviando...';
+            sendMassAlertBtn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('massAlertSent').classList.remove('hidden');
+                sendMassAlertBtn.textContent = 'Enviar alerta';
+                sendMassAlertBtn.disabled = false;
+            }, 1000);
+        });
+    }
+
+    // US43 Gestionar usuarios
+    const adminUsersBtn = document.getElementById('adminUsersBtn');
+    const adminUsersPanel = document.getElementById('adminUsersPanel');
+    const closeUsersPanel = document.getElementById('closeUsersPanel');
+
+    if (adminUsersBtn) {
+        adminUsersBtn.addEventListener('click', () => {
+            document.querySelectorAll('.admin-modal').forEach(m => m.classList.add('hidden'));
+            adminUsersPanel.classList.toggle('hidden');
+        });
+    }
+
+    if (closeUsersPanel) {
+        closeUsersPanel.addEventListener('click', () => adminUsersPanel.classList.add('hidden'));
+    }
+
+    // US44 Bloquear usuarios
+    document.querySelectorAll('[data-ubtn]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const row = btn.closest('tr');
+            const badge = row.querySelector('.u-badge');
+            if (badge.classList.contains('u-badge--active')) {
+                badge.textContent = 'Bloqueado';
+                badge.classList.remove('u-badge--active');
+                badge.classList.add('u-badge--blocked');
+                btn.textContent = 'Activar';
+                btn.classList.remove('op-btn--discard');
+                btn.classList.add('op-btn--confirm');
+            } else {
+                badge.textContent = 'Activo';
+                badge.classList.remove('u-badge--blocked');
+                badge.classList.add('u-badge--active');
+                btn.textContent = 'Bloquear';
+                btn.classList.remove('op-btn--confirm');
+                btn.classList.add('op-btn--discard');
+            }
+        });
+    });
+
+    // US42 Exportar reportes
+    const adminExportBtn = document.getElementById('adminExportBtn');
+    if (adminExportBtn) {
+        adminExportBtn.addEventListener('click', () => {
+            adminExportBtn.querySelector('strong').textContent = 'Exportando...';
+            setTimeout(() => {
+                adminExportBtn.querySelector('strong').textContent = 'Exportar reportes';
+                const fb = document.createElement('p');
+                fb.textContent = '✓ Reporte exportado como PDF.';
+                fb.style.cssText = 'font-size:0.8rem;color:#4CAF50;margin-top:8px;';
+                adminExportBtn.parentNode.appendChild(fb);
+                setTimeout(() => fb.remove(), 2500);
+            }, 1000);
+        });
+    }
+
+    // US41 Estadísticas / US48 Tendencias / US49 Auditorías / US50 Encuestas / US45 Operadores
+    ['adminStatsBtn', 'adminAuditBtn', 'adminSurveyBtn', 'adminOpsBtn'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        const msgs = {
+            adminStatsBtn: '📈 Módulo de tendencias y tiempos de respuesta disponible en la versión web completa.',
+            adminAuditBtn: '🔍 Registro de auditorías del sistema disponible para administradores con acceso completo.',
+            adminSurveyBtn: '📋 Encuesta de satisfacción enviada a los últimos 100 usuarios activos.',
+            adminOpsBtn: '👮 Panel de gestión de operadores disponible en el sistema de administración.',
+        };
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.admin-modal').forEach(m => m.classList.add('hidden'));
+            const fb = document.createElement('div');
+            fb.className = 'admin-modal';
+            fb.style.marginTop = '8px';
+            fb.innerHTML = `<p style="font-size:0.88rem;color:var(--dark);line-height:1.6">${msgs[id]}</p><button class="btn btn--ghost" style="margin-top:12px;font-size:0.82rem" onclick="this.closest('.admin-modal').remove()">Cerrar</button>`;
+            btn.closest('.admin-actions-grid').after(fb);
+        });
+    });
 });
