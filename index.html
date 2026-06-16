@@ -353,6 +353,378 @@
         </div>
     </section>
 
+    <!-- PANEL OPERADOR US31 US32 US33 US34 US35 US36 US37 US38 US39 US40 -->
+    <section class="operator-section" id="operator">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Panel de operador</span>
+                <h2 class="section-title">Centro de gestión de incidentes</h2>
+                <p class="section-desc">Vista del operador municipal para monitorear, validar y coordinar la respuesta a emergencias en tiempo real.</p>
+            </div>
+            <div class="operator__wrapper">
+                <div class="operator__sidebar">
+                    <div class="operator__role">
+                        <div class="operator__role-icon">👮</div>
+                        <div>
+                            <strong>Operador activo</strong>
+                            <span>Municipalidad de Lima · Turno mañana</span>
+                        </div>
+                    </div>
+                    <nav class="operator__nav">
+                        <button class="op-tab active" data-optab="monitor">Monitoreo</button>
+                        <button class="op-tab" data-optab="validate">Validar reportes</button>
+                        <button class="op-tab" data-optab="assign">Asignar unidades</button>
+                        <button class="op-tab" data-optab="history">Historial operador</button>
+                        <button class="op-tab" data-optab="admin">Panel admin</button>
+                    </nav>
+                    <div class="operator__stats-mini">
+                        <div class="op-stat"><span id="opPending">3</span><small>Pendientes</small></div>
+                        <div class="op-stat"><span id="opActive">2</span><small>En proceso</small></div>
+                        <div class="op-stat op-stat--ok"><span id="opResolved">18</span><small>Atendidos hoy</small></div>
+                    </div>
+                </div>
+                <div class="operator__content">
+
+                    <!-- US33 Monitorear incidentes -->
+                    <div class="op-panel active" id="optab-monitor">
+                        <div class="op-panel__header">
+                            <h4>Incidentes activos en tiempo real</h4>
+                            <span class="op-live-dot"></span>
+                            <span style="font-size:0.8rem;color:var(--gray-3)">Actualización en vivo</span>
+                        </div>
+                        <div class="op-incidents" id="opIncidentsList">
+                            <div class="op-incident op-incident--high" data-id="INC001">
+                                <div class="op-incident__priority">🔴</div>
+                                <div class="op-incident__body">
+                                    <strong>Accidente vehicular con heridos</strong>
+                                    <span>Av. Javier Prado Este 2140 · Hace 3 min</span>
+                                    <span class="op-incident__reporter">Reportado por ciudadano · Foto adjunta</span>
+                                </div>
+                                <div class="op-incident__actions">
+                                    <button class="op-btn op-btn--view" data-action="view" data-id="INC001">Ver</button>
+                                    <button class="op-btn op-btn--assign" data-action="assign" data-id="INC001">Asignar</button>
+                                </div>
+                            </div>
+                            <div class="op-incident op-incident--med" data-id="INC002">
+                                <div class="op-incident__priority">🟡</div>
+                                <div class="op-incident__body">
+                                    <strong>Fuga de gas domiciliaria</strong>
+                                    <span>San Isidro, Calle Las Magnolias 380 · Hace 8 min</span>
+                                    <span class="op-incident__reporter">Reportado por ciudadano · Sin evidencia</span>
+                                </div>
+                                <div class="op-incident__actions">
+                                    <button class="op-btn op-btn--view" data-action="view" data-id="INC002">Ver</button>
+                                    <button class="op-btn op-btn--assign" data-action="assign" data-id="INC002">Asignar</button>
+                                </div>
+                            </div>
+                            <div class="op-incident op-incident--low" data-id="INC003">
+                                <div class="op-incident__priority">🟢</div>
+                                <div class="op-incident__body">
+                                    <strong>Robo al paso</strong>
+                                    <span>Miraflores, Av. Larco 400 · Hace 12 min</span>
+                                    <span class="op-incident__reporter">Reporte anónimo · Video adjunto</span>
+                                </div>
+                                <div class="op-incident__actions">
+                                    <button class="op-btn op-btn--view" data-action="view" data-id="INC003">Ver</button>
+                                    <button class="op-btn op-btn--assign" data-action="assign" data-id="INC003">Asignar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="op-detail hidden" id="opDetail">
+                            <button class="op-detail__back" id="opDetailBack">← Volver</button>
+                            <div class="op-detail__content" id="opDetailContent"></div>
+                        </div>
+                    </div>
+
+                    <!-- US31 Validar reportes + US36 Detectar duplicados -->
+                    <div class="op-panel" id="optab-validate">
+                        <div class="op-panel__header">
+                            <h4>Validar reportes ciudadanos</h4>
+                        </div>
+                        <p style="font-size:0.88rem;color:var(--gray-3);margin-bottom:20px">Revisa, confirma o descarta los reportes antes de asignar recursos.</p>
+                        <div class="validate-list">
+                            <div class="validate-item" id="val1">
+                                <div class="validate-item__info">
+                                    <strong>#NX-2901 — Incendio en taller mecánico</strong>
+                                    <span>La Victoria · Video adjunto · Hace 5 min</span>
+                                </div>
+                                <div class="validate-item__flags">
+                                    <span class="val-flag val-flag--ok">Ubicación verificada</span>
+                                    <span class="val-flag val-flag--warn">Sin duplicados</span>
+                                </div>
+                                <div class="validate-item__actions">
+                                    <button class="op-btn op-btn--confirm" data-vid="val1">✓ Confirmar</button>
+                                    <button class="op-btn op-btn--discard" data-vid="val1">✗ Descartar</button>
+                                    <button class="op-btn op-btn--dup" data-vid="val1">Marcar duplicado</button>
+                                </div>
+                            </div>
+                            <div class="validate-item" id="val2">
+                                <div class="validate-item__info">
+                                    <strong>#NX-2902 — Persona herida en vía pública</strong>
+                                    <span>Surco · Sin evidencia · Hace 11 min</span>
+                                </div>
+                                <div class="validate-item__flags">
+                                    <span class="val-flag val-flag--warn">Ubicación imprecisa</span>
+                                    <span class="val-flag val-flag--err">Posible duplicado de #NX-2899</span>
+                                </div>
+                                <div class="validate-item__actions">
+                                    <button class="op-btn op-btn--confirm" data-vid="val2">✓ Confirmar</button>
+                                    <button class="op-btn op-btn--discard" data-vid="val2">✗ Descartar</button>
+                                    <button class="op-btn op-btn--dup" data-vid="val2">Marcar duplicado</button>
+                                </div>
+                            </div>
+                            <div class="validate-item" id="val3">
+                                <div class="validate-item__info">
+                                    <strong>#NX-2903 — Semáforo dañado</strong>
+                                    <span>Miraflores · Foto adjunta · Hace 18 min</span>
+                                </div>
+                                <div class="validate-item__flags">
+                                    <span class="val-flag val-flag--ok">Ubicación verificada</span>
+                                    <span class="val-flag val-flag--ok">Sin duplicados</span>
+                                </div>
+                                <div class="validate-item__actions">
+                                    <button class="op-btn op-btn--confirm" data-vid="val3">✓ Confirmar</button>
+                                    <button class="op-btn op-btn--discard" data-vid="val3">✗ Descartar</button>
+                                    <button class="op-btn op-btn--dup" data-vid="val3">Marcar duplicado</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="validate-empty hidden" id="validateEmpty">
+                            <span>✓</span>
+                            <p>No hay reportes pendientes de validación</p>
+                        </div>
+                    </div>
+
+                    <!-- US32 Asignar unidades + US37 Escalar + US39 Contactar + US34 Cerrar + US35 Actualizar estado -->
+                    <div class="op-panel" id="optab-assign">
+                        <div class="op-panel__header">
+                            <h4>Asignar unidades de respuesta</h4>
+                        </div>
+                        <div class="assign-incident-select">
+                            <label style="font-size:0.85rem;font-weight:600;font-family:var(--font-display)">Incidente a atender</label>
+                            <select id="assignIncidentSelect">
+                                <option value="">Selecciona un incidente</option>
+                                <option value="INC001">🔴 INC001 — Accidente vehicular con heridos</option>
+                                <option value="INC002">🟡 INC002 — Fuga de gas domiciliaria</option>
+                                <option value="INC003">🟢 INC003 — Robo al paso</option>
+                            </select>
+                        </div>
+                        <div class="assign-units" id="assignUnits">
+                            <div class="unit-card" data-unit="PNP">
+                                <div class="unit-card__icon">👮</div>
+                                <div class="unit-card__info">
+                                    <strong>PNP — Patrulla 04</strong>
+                                    <span>Disponible · 1.2 km</span>
+                                </div>
+                                <button class="unit-assign-btn" data-unit="PNP">Asignar</button>
+                            </div>
+                            <div class="unit-card" data-unit="BOB">
+                                <div class="unit-card__icon">🚒</div>
+                                <div class="unit-card__info">
+                                    <strong>Bomberos — Unidad 7</strong>
+                                    <span>Disponible · 2.4 km</span>
+                                </div>
+                                <button class="unit-assign-btn" data-unit="BOB">Asignar</button>
+                            </div>
+                            <div class="unit-card" data-unit="SAMU">
+                                <div class="unit-card__icon">🚑</div>
+                                <div class="unit-card__info">
+                                    <strong>SAMU — Ambulancia 12</strong>
+                                    <span>Disponible · 3.1 km</span>
+                                </div>
+                                <button class="unit-assign-btn" data-unit="SAMU">Asignar</button>
+                            </div>
+                            <div class="unit-card" data-unit="SERENAZGO">
+                                <div class="unit-card__icon">🛡️</div>
+                                <div class="unit-card__info">
+                                    <strong>Serenazgo — Moto 09</strong>
+                                    <span>Disponible · 0.8 km</span>
+                                </div>
+                                <button class="unit-assign-btn" data-unit="SERENAZGO">Asignar</button>
+                            </div>
+                        </div>
+                        <div class="assign-actions">
+                            <!-- US37 Escalar -->
+                            <button class="btn btn--outline" id="escalateBtn">↑ Escalar a Defensa Civil</button>
+                            <!-- US39 Contactar ciudadano -->
+                            <button class="btn btn--outline" id="contactCitizenBtn">📞 Contactar ciudadano</button>
+                            <!-- US34 Cerrar + US35 Actualizar estado -->
+                            <button class="btn btn--outline" id="updateStatusBtn">⟳ Actualizar estado</button>
+                            <button class="btn btn--danger" id="closeIncidentBtn" disabled>✓ Cerrar incidente</button>
+                        </div>
+                        <div class="assign-feedback hidden" id="assignFeedback"></div>
+                    </div>
+
+                    <!-- US40 Registrar historial -->
+                    <div class="op-panel" id="optab-history">
+                        <div class="op-panel__header">
+                            <h4>Historial de operaciones</h4>
+                            <button class="op-btn op-btn--export" id="exportHistoryBtn">⬇ Exportar</button>
+                        </div>
+                        <div class="op-history">
+                            <div class="op-hist-item op-hist-item--resolved">
+                                <span class="op-hist-status">✓ Cerrado</span>
+                                <div class="op-hist-body">
+                                    <strong>#NX-2841 — Accidente vehicular</strong>
+                                    <span>Av. Javier Prado · PNP + SAMU asignados · Resuelto en 8 min</span>
+                                    <time>08 Jun 2026, 10:23</time>
+                                </div>
+                            </div>
+                            <div class="op-hist-item op-hist-item--escalated">
+                                <span class="op-hist-status">↑ Escalado</span>
+                                <div class="op-hist-body">
+                                    <strong>#NX-2838 — Derrumbe parcial</strong>
+                                    <span>Rímac · Escalado a Defensa Civil · Resuelto en 42 min</span>
+                                    <time>07 Jun 2026, 17:05</time>
+                                </div>
+                            </div>
+                            <div class="op-hist-item op-hist-item--discarded">
+                                <span class="op-hist-status">✗ Descartado</span>
+                                <div class="op-hist-body">
+                                    <strong>#NX-2835 — Reporte duplicado</strong>
+                                    <span>Miraflores · Duplicado de #NX-2833</span>
+                                    <time>07 Jun 2026, 14:30</time>
+                                </div>
+                            </div>
+                            <div class="op-hist-item op-hist-item--resolved">
+                                <span class="op-hist-status">✓ Cerrado</span>
+                                <div class="op-hist-body">
+                                    <strong>#NX-2830 — Incendio en local comercial</strong>
+                                    <span>La Victoria · Bomberos asignados · Resuelto en 15 min</span>
+                                    <time>06 Jun 2026, 09:11</time>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="export-note hidden" id="exportNote">✓ Historial exportado en formato PDF.</p>
+                    </div>
+
+                    <!-- US41 Estadísticas + US42 Exportar + US43 Gestión usuarios + US44 Bloquear + US45 Operadores + US46 Alertas masivas + US47 Tiempos + US48 Tendencias + US49 Auditorías + US50 Encuestas -->
+                    <div class="op-panel" id="optab-admin">
+                        <div class="op-panel__header">
+                            <h4>Panel de administrador</h4>
+                            <span class="op-admin-badge">Admin</span>
+                        </div>
+                        <div class="admin-grid">
+                            <div class="admin-card admin-card--stat">
+                                <div class="admin-card__num">247</div>
+                                <div class="admin-card__label">Reportes este mes</div>
+                                <div class="admin-card__trend">↑ 12% vs mes anterior</div>
+                            </div>
+                            <div class="admin-card admin-card--stat">
+                                <div class="admin-card__num">8.4 min</div>
+                                <div class="admin-card__label">Tiempo promedio respuesta</div>
+                                <div class="admin-card__trend admin-card__trend--ok">↓ 18% vs mes anterior</div>
+                            </div>
+                            <div class="admin-card admin-card--stat">
+                                <div class="admin-card__num">1,024</div>
+                                <div class="admin-card__label">Usuarios registrados</div>
+                                <div class="admin-card__trend">↑ 5% este mes</div>
+                            </div>
+                            <div class="admin-card admin-card--stat">
+                                <div class="admin-card__num">94%</div>
+                                <div class="admin-card__label">Satisfacción usuarios</div>
+                                <div class="admin-card__trend admin-card__trend--ok">↑ 3 pts</div>
+                            </div>
+                        </div>
+                        <div class="admin-actions-grid">
+                            <!-- US42 Exportar -->
+                            <button class="admin-action-btn" id="adminExportBtn">
+                                <span>📊</span>
+                                <strong>Exportar reportes</strong>
+                                <small>PDF / Excel</small>
+                            </button>
+                            <!-- US43 Gestionar usuarios + US44 Bloquear -->
+                            <button class="admin-action-btn" id="adminUsersBtn">
+                                <span>👥</span>
+                                <strong>Gestionar usuarios</strong>
+                                <small>Ver, editar, bloquear</small>
+                            </button>
+                            <!-- US45 Gestionar operadores -->
+                            <button class="admin-action-btn" id="adminOpsBtn">
+                                <span>👮</span>
+                                <strong>Gestionar operadores</strong>
+                                <small>Cuentas y permisos</small>
+                            </button>
+                            <!-- US46 Alertas masivas -->
+                            <button class="admin-action-btn admin-action-btn--alert" id="adminAlertBtn">
+                                <span>📢</span>
+                                <strong>Alerta masiva</strong>
+                                <small>Enviar a ciudadanos</small>
+                            </button>
+                            <!-- US47 Medir tiempos + US48 Tendencias -->
+                            <button class="admin-action-btn" id="adminStatsBtn">
+                                <span>📈</span>
+                                <strong>Tendencias</strong>
+                                <small>Tiempos y zonas de riesgo</small>
+                            </button>
+                            <!-- US49 Auditorías -->
+                            <button class="admin-action-btn" id="adminAuditBtn">
+                                <span>🔍</span>
+                                <strong>Auditorías</strong>
+                                <small>Registro del sistema</small>
+                            </button>
+                            <!-- US50 Encuestas -->
+                            <button class="admin-action-btn" id="adminSurveyBtn">
+                                <span>📋</span>
+                                <strong>Enviar encuesta</strong>
+                                <small>Satisfacción usuarios</small>
+                            </button>
+                        </div>
+                        <!-- Modal masivo inline -->
+                        <div class="admin-modal hidden" id="adminMassAlert">
+                            <h4>Enviar alerta masiva</h4>
+                            <div class="form-group">
+                                <label>Tipo de alerta</label>
+                                <select id="massAlertType">
+                                    <option>Emergencia climática</option>
+                                    <option>Cierre de vía</option>
+                                    <option>Corte de servicio</option>
+                                    <option>Aviso de seguridad</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Zona afectada</label>
+                                <select id="massAlertZone">
+                                    <option>Todo Lima Metropolitana</option>
+                                    <option>Lima Centro</option>
+                                    <option>Lima Sur</option>
+                                    <option>Lima Norte</option>
+                                    <option>Lima Este</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Mensaje</label>
+                                <textarea id="massAlertMsg" placeholder="Redacta el mensaje de alerta..." style="min-height:70px"></textarea>
+                            </div>
+                            <div class="admin-modal__actions">
+                                <button class="btn btn--primary" id="sendMassAlertBtn">Enviar alerta</button>
+                                <button class="btn btn--ghost" id="cancelMassAlertBtn">Cancelar</button>
+                            </div>
+                            <p class="profile__save-msg hidden" id="massAlertSent">✓ Alerta enviada a los ciudadanos registrados.</p>
+                        </div>
+                        <!-- US43 panel inline -->
+                        <div class="admin-modal hidden" id="adminUsersPanel">
+                            <h4>Gestión de usuarios</h4>
+                            <div class="users-table-wrapper">
+                                <table class="users-table">
+                                    <thead><tr><th>Usuario</th><th>Reportes</th><th>Estado</th><th>Acción</th></tr></thead>
+                                    <tbody>
+                                    <tr><td>María Ramos</td><td>12</td><td><span class="u-badge u-badge--active">Activo</span></td><td><button class="op-btn op-btn--discard" data-ubtn="maria">Bloquear</button></td></tr>
+                                    <tr><td>Carlos Vega</td><td>4</td><td><span class="u-badge u-badge--active">Activo</span></td><td><button class="op-btn op-btn--discard" data-ubtn="carlos">Bloquear</button></td></tr>
+                                    <tr><td>Luis Quispe</td><td>0</td><td><span class="u-badge u-badge--blocked">Bloqueado</span></td><td><button class="op-btn op-btn--confirm" data-ubtn="luis">Activar</button></td></tr>
+                                    <tr><td>Ana Torres</td><td>7</td><td><span class="u-badge u-badge--active">Activo</span></td><td><button class="op-btn op-btn--discard" data-ubtn="ana">Bloquear</button></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn--ghost" id="closeUsersPanel" style="margin-top:12px">Cerrar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
 <script src="main.js"></script>
 </body>
 </html>
