@@ -551,4 +551,99 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.closest('.admin-actions-grid').after(fb);
         });
     });
+
+    // ===== PERFIL =====
+    const profileNavItems = document.querySelectorAll('.profile__nav-item');
+    const profilePanels = document.querySelectorAll('.profile__panel');
+
+    profileNavItems.forEach(btn => {
+        btn.addEventListener('click', () => {
+            profileNavItems.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const tab = btn.getAttribute('data-ptab');
+            profilePanels.forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('ptab-' + tab);
+            if (target) target.classList.add('active');
+        });
+    });
+
+    const profileForm = document.getElementById('profileForm');
+    if (profileForm) {
+        profileForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('pName').value.trim();
+            const lastname = document.getElementById('pLastname').value.trim();
+            if (name && lastname) {
+                document.getElementById('avatarCircle').textContent = (name[0] + lastname[0]).toUpperCase();
+            }
+            const msg = document.getElementById('profileSaveMsg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2500);
+        });
+    }
+
+    const savePrivacyBtn = document.getElementById('savePrivacyBtn');
+    if (savePrivacyBtn) {
+        savePrivacyBtn.addEventListener('click', () => {
+            const msg = document.getElementById('privacySaveMsg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2500);
+        });
+    }
+
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    themeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            themeButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
+    const sizeButtons = document.querySelectorAll('.size-btn');
+    sizeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            sizeButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
+    const saveAppearanceBtn = document.getElementById('saveAppearanceBtn');
+    if (saveAppearanceBtn) {
+        saveAppearanceBtn.addEventListener('click', () => {
+            const msg = document.getElementById('appearanceSaveMsg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2500);
+        });
+    }
+
+    document.querySelectorAll('.sync-remove').forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.closest('.sync-item').style.opacity = '0.4';
+            btn.textContent = 'Desconectado';
+            btn.style.color = 'var(--gray-3)';
+            btn.disabled = true;
+        });
+    });
+
+    const addDeviceBtn = document.getElementById('addDeviceBtn');
+    if (addDeviceBtn) {
+        addDeviceBtn.addEventListener('click', () => {
+            const note = document.getElementById('syncNote');
+            note.classList.remove('hidden');
+            addDeviceBtn.textContent = 'Enlace enviado ✓';
+            addDeviceBtn.disabled = true;
+        });
+    }
+
+    const deleteConfirmInput = document.getElementById('deleteConfirm');
+    const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+    if (deleteConfirmInput && deleteAccountBtn) {
+        deleteConfirmInput.addEventListener('input', () => {
+            deleteAccountBtn.disabled = deleteConfirmInput.value !== 'ELIMINAR';
+        });
+        deleteAccountBtn.addEventListener('click', () => {
+            document.getElementById('deleteSuccess').classList.remove('hidden');
+            deleteAccountBtn.disabled = true;
+        });
+    }
 });

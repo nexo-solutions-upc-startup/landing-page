@@ -353,6 +353,212 @@
         </div>
     </section>
 
+    <!-- PERFIL DE USUARIO US24 US25 US26 US27 US28 US30 -->
+    <section class="profile-section" id="profile">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Mi perfil</span>
+                <h2 class="section-title">Gestiona tu cuenta</h2>
+                <p class="section-desc">Edita tus datos, ajusta preferencias y controla tu privacidad desde un solo lugar.</p>
+            </div>
+            <div class="profile__wrapper">
+                <div class="profile__sidebar">
+                    <div class="profile__avatar">
+                        <div class="profile__avatar-circle" id="avatarCircle">JG</div>
+                        <button class="profile__avatar-change">Cambiar foto</button>
+                    </div>
+                    <nav class="profile__nav">
+                        <button class="profile__nav-item active" data-ptab="edit">Datos personales</button>
+                        <button class="profile__nav-item" data-ptab="privacy">Privacidad</button>
+                        <button class="profile__nav-item" data-ptab="appearance">Apariencia</button>
+                        <button class="profile__nav-item" data-ptab="sync">Dispositivos</button>
+                        <button class="profile__nav-item profile__nav-item--danger" data-ptab="delete">Eliminar cuenta</button>
+                    </nav>
+                </div>
+                <div class="profile__content">
+
+                    <div class="profile__panel active" id="ptab-edit">
+                        <h3 class="profile__panel-title">Datos personales</h3>
+                        <form class="account-form" id="profileForm" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" id="pName" value="Juan García">
+                                </div>
+                                <div class="form-group">
+                                    <label>Apellido</label>
+                                    <input type="text" id="pLastname" value="López">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Correo electrónico</label>
+                                <input type="email" id="pEmail" value="juan.garcia@correo.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Teléfono</label>
+                                <input type="tel" id="pPhone" placeholder="+51 9XXXXXXXX">
+                            </div>
+                            <div class="form-group">
+                                <label>Distrito</label>
+                                <select id="pDistrict">
+                                    <option>Miraflores</option>
+                                    <option>San Isidro</option>
+                                    <option>Surco</option>
+                                    <option>La Molina</option>
+                                    <option>San Borja</option>
+                                    <option>Barranco</option>
+                                    <option>Lima Cercado</option>
+                                </select>
+                            </div>
+                            <div class="profile__actions">
+                                <button type="submit" class="btn btn--primary">Guardar cambios</button>
+                                <span class="profile__save-msg hidden" id="profileSaveMsg">✓ Cambios guardados</span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="profile__panel" id="ptab-privacy">
+                        <h3 class="profile__panel-title">Configurar privacidad</h3>
+                        <div class="privacy-list">
+                            <div class="toggle-row">
+                                <div>
+                                    <strong>Ubicación visible en el mapa</strong>
+                                    <span class="toggle-sub">Permite que otros ciudadanos vean tu posición aproximada</span>
+                                </div>
+                                <label class="toggle"><input type="checkbox" checked><span class="toggle__slider"></span></label>
+                            </div>
+                            <div class="toggle-row">
+                                <div>
+                                    <strong>Reportes públicos por defecto</strong>
+                                    <span class="toggle-sub">Tus reportes serán visibles en el mapa comunitario</span>
+                                </div>
+                                <label class="toggle"><input type="checkbox" checked><span class="toggle__slider"></span></label>
+                            </div>
+                            <div class="toggle-row">
+                                <div>
+                                    <strong>Compartir historial con autoridades</strong>
+                                    <span class="toggle-sub">Las entidades podrán consultar tus reportes anteriores</span>
+                                </div>
+                                <label class="toggle"><input type="checkbox"><span class="toggle__slider"></span></label>
+                            </div>
+                            <div class="toggle-row">
+                                <div>
+                                    <strong>Perfil anónimo por defecto</strong>
+                                    <span class="toggle-sub">Tus reportes no mostrarán tu nombre ni foto</span>
+                                </div>
+                                <label class="toggle"><input type="checkbox"><span class="toggle__slider"></span></label>
+                            </div>
+                        </div>
+                        <div class="profile__actions" style="margin-top:24px">
+                            <button class="btn btn--primary" id="savePrivacyBtn">Guardar preferencias</button>
+                            <span class="profile__save-msg hidden" id="privacySaveMsg">✓ Preferencias guardadas</span>
+                        </div>
+                    </div>
+
+                    <div class="profile__panel" id="ptab-appearance">
+                        <h3 class="profile__panel-title">Apariencia e idioma</h3>
+                        <div class="appearance-list">
+                            <div class="appearance-item">
+                                <strong>Modo de visualización</strong>
+                                <div class="theme-options">
+                                    <button class="theme-btn active" id="themeLight" data-theme="light">☀️ Claro</button>
+                                    <button class="theme-btn" id="themeDark" data-theme="dark">🌙 Oscuro</button>
+                                    <button class="theme-btn" id="themeAuto" data-theme="auto">⚙️ Sistema</button>
+                                </div>
+                            </div>
+                            <div class="appearance-item">
+                                <strong>Idioma de la aplicación</strong>
+                                <select id="langSelect" class="lang-select">
+                                    <option value="es" selected>🇵🇪 Español (Perú)</option>
+                                    <option value="en">🇺🇸 English</option>
+                                    <option value="qu">Quechua</option>
+                                </select>
+                            </div>
+                            <div class="appearance-item">
+                                <strong>Tamaño de texto</strong>
+                                <div class="size-options">
+                                    <button class="size-btn" data-size="sm">A</button>
+                                    <button class="size-btn active" data-size="md">A</button>
+                                    <button class="size-btn" data-size="lg">A</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile__actions" style="margin-top:24px">
+                            <button class="btn btn--primary" id="saveAppearanceBtn">Aplicar</button>
+                            <span class="profile__save-msg hidden" id="appearanceSaveMsg">✓ Apariencia actualizada</span>
+                        </div>
+                    </div>
+
+                    <div class="profile__panel" id="ptab-sync">
+                        <h3 class="profile__panel-title">Dispositivos vinculados</h3>
+                        <div class="sync-list">
+                            <div class="sync-item sync-item--current">
+                                <div class="sync-icon">📱</div>
+                                <div class="sync-body">
+                                    <strong>Samsung Galaxy S23 <span class="sync-badge">Este dispositivo</span></strong>
+                                    <span>Android 14 · Lima, Perú</span>
+                                    <time>Activo ahora</time>
+                                </div>
+                            </div>
+                            <div class="sync-item">
+                                <div class="sync-icon">💻</div>
+                                <div class="sync-body">
+                                    <strong>Chrome en Windows</strong>
+                                    <span>Navegador web · Lima, Perú</span>
+                                    <time>Hace 2 días</time>
+                                </div>
+                                <button class="sync-remove" data-device="chrome">Desconectar</button>
+                            </div>
+                            <div class="sync-item">
+                                <div class="sync-icon">📱</div>
+                                <div class="sync-body">
+                                    <strong>iPhone 14</strong>
+                                    <span>iOS 17 · Lima, Perú</span>
+                                    <time>Hace 1 semana</time>
+                                </div>
+                                <button class="sync-remove" data-device="iphone">Desconectar</button>
+                            </div>
+                        </div>
+                        <button class="btn btn--ghost" style="margin-top:16px" id="addDeviceBtn">+ Vincular nuevo dispositivo</button>
+                        <p class="sync-note hidden" id="syncNote">✓ Se enviará un enlace de vinculación a tu correo.</p>
+                    </div>
+
+                    <div class="profile__panel" id="ptab-delete">
+                        <h3 class="profile__panel-title" style="color:var(--red)">Eliminar cuenta</h3>
+                        <div class="delete-warning">
+                            <div class="delete-warning__icon">⚠️</div>
+                            <div>
+                                <strong>Esta acción es permanente e irreversible</strong>
+                                <p>Se eliminarán todos tus reportes, historial y datos personales. Las autoridades perderán acceso a tu historial de incidentes.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:20px">
+                            <label>Escribe <strong>ELIMINAR</strong> para confirmar</label>
+                            <input type="text" id="deleteConfirm" placeholder="ELIMINAR">
+                        </div>
+                        <div class="form-group">
+                            <label>Motivo (opcional)</label>
+                            <select id="deleteReason">
+                                <option value="">Selecciona un motivo</option>
+                                <option>Ya no uso la aplicación</option>
+                                <option>Preocupaciones de privacidad</option>
+                                <option>Problemas técnicos</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                        <button class="btn btn--danger" id="deleteAccountBtn" disabled>Eliminar mi cuenta</button>
+                        <div class="acc-success hidden" id="deleteSuccess" style="margin-top:16px">
+                            <span class="acc-success__icon" style="background:#E53935">✕</span>
+                            <h3>Solicitud enviada</h3>
+                            <p>Tu cuenta será eliminada en 30 días. Puedes cancelar esto iniciando sesión antes de ese plazo.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- PANEL OPERADOR US31 US32 US33 US34 US35 US36 US37 US38 US39 US40 -->
     <section class="operator-section" id="operator">
         <div class="container">
