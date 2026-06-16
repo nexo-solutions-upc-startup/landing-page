@@ -224,6 +224,54 @@
         </div>
     </section>
 
+    <section class="map-section" id="map">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Mapa en vivo</span>
+                <h2 class="section-title">Emergencias activas en Lima</h2>
+                <p class="section-desc">Simulación del mapa interactivo de Nexo Urbano con incidentes recientes.</p>
+            </div>
+            <div class="map-demo">
+                <div class="map-demo__canvas" id="mapCanvas">
+                    <div class="map-grid"></div>
+                    <div class="map-incident" style="top:30%;left:40%" data-type="accident" data-loc="Av. Javier Prado">
+                        <span class="map-pin map-pin--accident">🚗</span>
+                        <div class="map-tooltip">Accidente vehicular<br>Av. Javier Prado<br><em>Hace 5 min</em></div>
+                    </div>
+                    <div class="map-incident" style="top:55%;left:60%" data-type="robbery" data-loc="Miraflores">
+                        <span class="map-pin map-pin--robbery">🔫</span>
+                        <div class="map-tooltip">Robo en curso<br>Miraflores<br><em>Hace 2 min</em></div>
+                    </div>
+                    <div class="map-incident" style="top:45%;left:25%" data-type="fire" data-loc="La Victoria">
+                        <span class="map-pin map-pin--fire">🔥</span>
+                        <div class="map-tooltip">Incendio<br>La Victoria<br><em>Atendido</em></div>
+                    </div>
+                    <div class="map-incident" style="top:20%;left:70%" data-type="gas" data-loc="San Isidro">
+                        <span class="map-pin map-pin--gas">⚡</span>
+                        <div class="map-tooltip">Fuga de gas<br>San Isidro<br><em>Hace 8 min</em></div>
+                    </div>
+                    <div class="map-user-dot">
+                        <span class="map-user-pulse"></span>
+                        <span class="map-user-center">Tú</span>
+                    </div>
+                </div>
+                <div class="map-demo__legend">
+                    <div class="legend-item"><span class="map-pin map-pin--accident">🚗</span> Accidente</div>
+                    <div class="legend-item"><span class="map-pin map-pin--robbery">🔫</span> Robo</div>
+                    <div class="legend-item"><span class="map-pin map-pin--fire">🔥</span> Incendio</div>
+                    <div class="legend-item"><span class="map-pin map-pin--gas">⚡</span> Fuga de gas</div>
+                </div>
+                <div class="map-demo__filters">
+                    <button class="map-filter active" data-filter="all">Todos</button>
+                    <button class="map-filter" data-filter="accident">Accidentes</button>
+                    <button class="map-filter" data-filter="robbery">Robos</button>
+                    <button class="map-filter" data-filter="fire">Incendios</button>
+                    <button class="map-filter" data-filter="gas">Fugas de Gas</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
 <script src="main.js"></script>
 </body>
 </html>

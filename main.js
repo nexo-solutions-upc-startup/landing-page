@@ -89,4 +89,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.demo__cat').forEach(b => b.classList.remove('selected'));
         showStep(demoStep1);
     });
+
+    const mapFilters = document.querySelectorAll('.map-filter');
+    const mapIncidents = document.querySelectorAll('.map-incident');
+
+    mapFilters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            mapFilters.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+            mapIncidents.forEach(inc => {
+                if (filter === 'all') {
+                    inc.style.display = 'block';
+                } else {
+                    const type = inc.getAttribute('data-type').toLowerCase();
+                    inc.style.display = type.includes(filter) ? 'block' : 'none';
+                }
+            });
+        });
+    });
 });
