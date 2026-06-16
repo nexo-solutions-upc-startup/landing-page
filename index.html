@@ -10,6 +10,100 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<nav class="nav" id="navbar">
+    <div class="nav__inner">
+        <a href="#" class="nav__logo">
+            <span class="nav__logo-icon">!</span>
+            <span>Nexo Urbano</span>
+        </a>
+        <ul class="nav__links" id="navLinks">
+            <li><a href="#features">Funcionalidades</a></li>
+            <li><a href="#how">¿Cómo funciona?</a></li>
+            <li><a href="#benefits">Beneficios</a></li>
+            <li><a href="#stats">Impacto</a></li>
+            <li><a href="#profile">Mi perfil</a></li>
+            <li><a href="#operator">Operadores</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+        <div class="nav__actions">
+            <a href="#download" class="btn btn--outline">Descargar app</a>
+            <button class="nav__hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
 
+<section class="hero" id="home">
+    <div class="hero__bg-grid"></div>
+    <div class="hero__inner">
+        <div class="hero__text">
+            <span class="hero__badge">Lima Metropolitana</span>
+            <h1 class="hero__title">Reporta cualquier <span class="hero__title--accent">emergencia urbana</span> en segundos.</h1>
+            <p class="hero__subtitle">Nexo Urbano conecta a ciudadanos con bomberos, policía y Defensa Civil en tiempo real. Un solo botón, toda la información, respuesta inmediata.</p>
+            <div class="hero__cta">
+                <a href="#download" class="btn btn--primary">Descargar gratis</a>
+                <a href="#how" class="btn btn--ghost">Ver cómo funciona</a>
+            </div>
+            <div class="hero__proof">
+                <div class="hero__proof-item">
+                    <strong>30 seg</strong>
+                    <span>tiempo de reporte</span>
+                </div>
+                <div class="hero__proof-divider"></div>
+                <div class="hero__proof-item">
+                    <strong>3 pasos</strong>
+                    <span>para enviar alerta</span>
+                </div>
+                <div class="hero__proof-divider"></div>
+                <div class="hero__proof-item">
+                    <strong>24/7</strong>
+                    <span>disponible siempre</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero__visual">
+            <div class="hero__phone">
+                <div class="hero__phone-screen">
+                    <div class="phone-ui">
+                        <div class="phone-ui__header">
+                            <span class="phone-ui__time">9:41</span>
+                            <span class="phone-ui__title">Nexo Urbano</span>
+                        </div>
+                        <div class="phone-ui__body">
+                            <p class="phone-ui__greeting">Hola, ¿estás bien?</p>
+                            <button class="sos-btn" id="sosBtnHero" aria-label="Botón SOS">
+                                <span class="sos-btn__ring sos-btn__ring--1"></span>
+                                <span class="sos-btn__ring sos-btn__ring--2"></span>
+                                <span class="sos-btn__label">S.O.S</span>
+                            </button>
+                            <p class="phone-ui__hint">Mantén presionado para reportar</p>
+                            <div class="phone-ui__map">
+                                <div class="map-dot map-dot--1"></div>
+                                <div class="map-dot map-dot--2"></div>
+                                <div class="map-dot map-dot--3"></div>
+                                <span class="map-label">Incidentes cercanos</span>
+                            </div>
+                        </div>
+                        <div class="phone-ui__nav">
+                            <span>🏠</span><span>🗺️</span><span class="active">🚨</span><span>📋</span><span>👤</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__floating hero__floating--1">
+                <span>📍</span> Ubicación detectada
+            </div>
+            <div class="hero__floating hero__floating--2">
+                <span>✅</span> Reporte enviado
+            </div>
+            <div class="hero__floating hero__floating--3">
+                <span>🚒</span> Bomberos en camino
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="main.js"></script>
 </body>
 </html>
