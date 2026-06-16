@@ -272,6 +272,87 @@
         </div>
     </section>
 
+    <section class="account-section" id="account">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow">Tu cuenta</span>
+                <h2 class="section-title">Regístrate y empieza a reportar</h2>
+            </div>
+            <div class="account__wrapper">
+                <div class="account__tabs">
+                    <button class="acc-tab active" data-acc="register">Crear cuenta</button>
+                    <button class="acc-tab" data-acc="login">Iniciar sesión</button>
+                </div>
+
+                <div class="acc-panel active" id="acc-register">
+                    <form class="account-form" id="registerForm" novalidate>
+                        <div class="form-group">
+                            <label>Nombre completo</label>
+                            <input type="text" id="regName" placeholder="Juan García" required>
+                            <span class="form-error" id="regNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo electrónico</label>
+                            <input type="email" id="regEmail" placeholder="juan@correo.com" required>
+                            <span class="form-error" id="regEmailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" id="regPass" placeholder="Mínimo 8 caracteres" required>
+                            <span class="form-error" id="regPassError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirmar contraseña</label>
+                            <input type="password" id="regPass2" placeholder="Repite tu contraseña" required>
+                            <span class="form-error" id="regPass2Error"></span>
+                        </div>
+                        <label class="form-check">
+                            <input type="checkbox" id="regTerms"> Acepto los <a href="#terms">términos y condiciones</a>
+                        </label>
+                        <button type="submit" class="btn btn--primary btn--full">Crear cuenta</button>
+                    </form>
+                    <div class="acc-success hidden" id="regSuccess">
+                        <span class="acc-success__icon">✓</span>
+                        <h3>¡Cuenta creada!</h3>
+                        <p>Bienvenido a Nexo Urbano. Ya puedes empezar a reportar emergencias.</p>
+                    </div>
+                </div>
+
+                <div class="acc-panel" id="acc-login">
+                    <form class="account-form" id="loginForm" novalidate>
+                        <div class="form-group">
+                            <label>Correo electrónico</label>
+                            <input type="email" id="loginEmail" placeholder="tu@correo.com" required>
+                            <span class="form-error" id="loginEmailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" id="loginPass" placeholder="Tu contraseña" required>
+                            <span class="form-error" id="loginPassError"></span>
+                        </div>
+                        <a href="#" class="form-link" id="recoverLink">¿Olvidaste tu contraseña?</a>
+                        <button type="submit" class="btn btn--primary btn--full">Iniciar sesión</button>
+                    </form>
+                    <div class="acc-success hidden" id="loginSuccess">
+                        <span class="acc-success__icon">✓</span>
+                        <h3>¡Sesión iniciada!</h3>
+                        <p>Bienvenido de vuelta. Redirigiendo a la aplicación...</p>
+                    </div>
+                    <div class="acc-success hidden" id="recoverPanel">
+                        <h3>Recuperar contraseña</h3>
+                        <div class="form-group">
+                            <label>Tu correo registrado</label>
+                            <input type="email" id="recoverEmail" placeholder="tu@correo.com">
+                        </div>
+                        <button class="btn btn--primary btn--full" id="sendRecoverBtn">Enviar enlace</button>
+                        <p class="recover-msg hidden" id="recoverMsg">✓ Enviamos un enlace a tu correo.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 <script src="main.js"></script>
 </body>
 </html>
