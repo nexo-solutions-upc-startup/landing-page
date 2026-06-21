@@ -74,10 +74,13 @@ Coordinadores de juntas vecinales, bomberos voluntarios del CGBVP y personal de 
 
 ```
 landing-page/
-├── index.html       # Página principal
-├── styles.css       # Estilos globales
-├── main.js          # Lógica e interacciones
-└── assets/          # Recursos estáticos (imágenes, íconos, fuentes)
+├── index.html
+└── assets/
+    ├── images/
+    ├── styles/
+    │   └── styles.css
+    └── scripts/
+        └── main.js
 ```
 
 ---
