@@ -33,13 +33,17 @@ Este repositorio contiene la implementación de la landing page oficial del proy
 
 ## Segmentos Objetivo
 
-### Segmento 1: Ciudadanos urbanos en zonas de riesgo
+### Segmento 1: Tránseuntes urbanos 
 
-Hombres y mujeres de 18 a 40 años, NSE B y C, residentes de Lima Metropolitana, Arequipa, Trujillo y Callao. Son usuarios activos de smartphones que enfrentan emergencias sin contar con un canal único y confiable para reportarlas. Necesitan una herramienta rápida que detecte su ubicación automáticamente y les permita adjuntar evidencia sin pasos complicados.
+Hombres y mujeres de 18 a 60 años que transitan diariamente por calles, avenidas y espacios públicos de Lima Metropolitana, Arequipa, Trujillo y Callao. Son usuarios activos de smartphones que pueden presenciar accidentes, robos, incendios u otras situaciones de emergencia mientras se desplazan. Necesitan una herramienta rápida que detecte automáticamente su ubicación y les permita reportar incidentes con evidencia sin realizar procesos complejos.
 
-### Segmento 2: Operadores de respuesta a emergencias urbanas
+### Segmento 2: Estudiantes universitarios
 
-Coordinadores de juntas vecinales, bomberos voluntarios del CGBVP y personal de serenazgo municipal, de 25 a 55 años, distribuidos en Lima Metropolitana y municipios distritales. Hoy gestionan reportes por llamadas telefónicas o radio, sin acceso a geolocalización en tiempo real. Requieren un panel centralizado que les permita validar, priorizar y atender incidentes de forma ágil.
+Jóvenes de 17 a 30 años que se desplazan diariamente entre sus hogares, universidades y otros espacios urbanos. Utilizan constantemente dispositivos móviles y aplicaciones digitales como parte de su rutina. Debido a su movilidad frecuente, pueden ser testigos o víctimas de emergencias y requieren una aplicación intuitiva que les permita reportarlas de forma inmediata, compartiendo su ubicación y evidencia para agilizar la respuesta.
+
+### Segmento 3: Conductores
+
+Conductores particulares, taxistas y repartidores de 20 a 60 años que circulan diariamente por vías urbanas de alta afluencia vehicular. Al permanecer gran parte del día en las calles, suelen ser los primeros en presenciar accidentes de tránsito, vehículos averiados u otras emergencias. Necesitan una herramienta que facilite el reporte rápido de incidentes mediante geolocalización automática y el envío de evidencia multimedia, reduciendo el tiempo de respuesta de los servicios de emergencia.
 
 ---
 
